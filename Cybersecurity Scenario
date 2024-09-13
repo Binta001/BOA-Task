@@ -1,0 +1,41 @@
+1.Threat Intelligence Report
+a). List the types of attack that could be use:
+•	SQL Injection: Hackers send malicious SQL code to manipulate databases.
+•	Cross-Site Scripting (XSS): Malicious code is injected into the web application to steal information.
+•	Remote Code Execution (RCE): Attackers execute code remotely on the compromised system.
+•	Privilege Escalation: Attackers gain higher-level permissions to access key systems.
+b). Explain how a vulnerability exploited can provide access to the network.
+•	An unpatched web application can be exploited through vulnerabilities like RCE or SQL injection, allowing attackers to gain unauthorized access. Once inside, they can move laterally within the network to access sensitive data or systems.
+c). Suggest preventive measures to avoid similar incidents in the future.
+•	Patch Management: Regular updates and installation of security patches.
+•	Web Application Firewall (WAF): Use WAF to block malicious traffic.
+•	Cloud Security Services: Continuously monitor and enforce compliance using AWS Security Hub.
+•	Vulnerability Scanning: Periodically scan and test the security posture of all systems, including cloud services.
+•	Secure Coding Practices: Validate inputs and use proper input sanitization to prevent SQL injection attacks.
+2. Incident Response Plan:
+a). Outline an incident response plan to address the breach.
+       Containment:
+•	Isolate Compromised Systems: Immediately isolate compromised web applications and servers.
+•	Block Malicious IPs: Use cloud-based security solutions to block attackers.
+•	Temporary Patching: Apply quick fixes to prevent further exploitation.
+Eradication:
+•	Find Root Cause: Analyze logs using cloud monitoring tools (e.g., AWS CloudTrail).
+•	Remove Malware: Scan infected machines to remove any malicious code.
+•	Patch Vulnerability: Apply a permanent fix to the exploited vulnerability.
+Recovery:
+•	System Recovery: Utilize cloud backup or snapshots to restore clean versions of affected systems.
+•	Test for Stability: Verify that systems are functioning securely after restoration.
+•	Monitor for Recurrence: Continuously monitor logs and alerts for any signs of abnormal behavior.
+3. Network Security Measures:
+    Intrusion Detection/Prevention System (IDS/IPS):
+•	Detect and block malicious activities in real-time. AWS GuardDuty can be used to monitor and alert people to suspicious activities.
+Next-Generation Firewalls:
+•	Use AWS Network Firewall for deep packet inspection and traffic filtering.
+Network Segmentation:
+•	Isolate critical systems into different cloud segments (VPCs) to limit the impact of a breach.
+•	Enforce strict access controls between these segments to prevent lateral movement.
+
+Supplementary Measures:
+•	Multi-Factor Authentication (MFA): Enforce MFA for all privileged accounts.
+•	Encryption: Encrypt data both in transit and at rest.
+•	Cloud Security Monitoring: Use AWS Security Hub for continuous security posture management.
