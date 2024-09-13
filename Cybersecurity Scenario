@@ -14,7 +14,16 @@ c). Suggest preventive measures to avoid similar incidents in the future.
 •	Secure Coding Practices: Validate inputs and use proper input sanitization to prevent SQL injection attacks.
 2. Incident Response Plan:
 a). Outline an incident response plan to address the breach.
-       Containment:
+    Include steps for containment, eradication, and recovery.
+    Preparation:
+•	Form an incident response team (IRT).
+•	Ensure security tools are in place (firewalls, SIEM).
+•	Have documented procedures ready.
+Identification:
+•	Investigate alerts.
+•	Analyze logs to confirm the breach.
+•	Assess the impact on systems and data.
+Containment:
 •	Isolate Compromised Systems: Immediately isolate compromised web applications and servers.
 •	Block Malicious IPs: Use cloud-based security solutions to block attackers.
 •	Temporary Patching: Apply quick fixes to prevent further exploitation.
@@ -23,14 +32,14 @@ Eradication:
 •	Remove Malware: Scan infected machines to remove any malicious code.
 •	Patch Vulnerability: Apply a permanent fix to the exploited vulnerability.
 Recovery:
-•	System Recovery: Utilize cloud backup or snapshots to restore clean versions of affected systems.
+•      System Recovery: Utilize cloud backup or snapshots to restore clean versions of affected systems.
 •	Test for Stability: Verify that systems are functioning securely after restoration.
 •	Monitor for Recurrence: Continuously monitor logs and alerts for any signs of abnormal behavior.
 3. Network Security Measures:
     Intrusion Detection/Prevention System (IDS/IPS):
-•	Detect and block malicious activities in real-time. AWS GuardDuty can be used to monitor and alert people to suspicious activities.
-Next-Generation Firewalls:
-•	Use AWS Network Firewall for deep packet inspection and traffic filtering.
+•      Detect and block malicious activities in real-time. AWS GuardDuty can be used to monitor and alert people to suspicious activities.
+       Next-Generation Firewalls:
+•      Use AWS Network Firewall for deep packet inspection and traffic filtering.
 Network Segmentation:
 •	Isolate critical systems into different cloud segments (VPCs) to limit the impact of a breach.
 •	Enforce strict access controls between these segments to prevent lateral movement.
