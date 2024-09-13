@@ -1,0 +1,75 @@
+pipeline {
+    agent any
+
+    environment {
+        // Set up environment variables
+        AWS_REGION = 'us-east-1'
+        AWS_ACCOUNT_ID = 'aws-account-id'
+        LAMBDA_FUNCTION_NAME = 'ambda-function-name'
+        S3_BUCKET = 's3-bucket-name'
+        DEPLOYMENT_PACKAGE = 'deployment-package.zip'
+    }
+
+    stages {
+        stage('Checkout') {
+            steps {
+                // Pull the latest code from your Git repository
+                git url: 'https://github.com/username/repo.git', branch: 'main'
+            }
+        }
+
+        stage('Lint') {
+            steps {
+                // Check your code for any linting issues
+                sh 'npm install eslint'
+                sh 'npx eslint .'
+            }
+        }
+
+        stage('Test') {
+            steps {
+                // Run tests to make sure everything is working correctly
+                sh 'npm install'
+                sh 'npm test'
+            }
+        }
+
+        stage('Build') {
+            steps {
+                // Package your application into a ZIP file for deployment
+                sh 'zip -r ${DEPLOYMENT_PACKAGE} .'
+            }
+        }
+
+        stage('Upload to S3') {
+            steps {
+                // Upload the deployment package to S3
+                sh """
+                aws s3 cp ${DEPLOYMENT_PACKAGE} s3://${S3_BUCKET}/${DEPLOYMENT_PACKAGE} --region ${AWS_REGION}
+                """
+            }
+        }
+
+        stage('Deploy to Lambda') {
+            steps {
+                // Deploy the code to AWS Lambda from S3
+                sh """
+                aws lambda update-function-code \
+                    --function-name ${LAMBDA_FUNCTION_NAME} \
+                    --s3-bucket ${S3_BUCKET} \
+                    --s3-key ${DEPLOYMENT_PACKAGE} \
+                    --region ${AWS_REGION}
+                """
+            }
+        }
+    }
+
+    post {
+        success {
+            echo 'Deployment was successful!'
+        }
+        failure {
+            echo 'Oops, something went wrong with the deployment.'
+        }
+    }
+}
