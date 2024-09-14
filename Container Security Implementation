@@ -5,38 +5,38 @@ Limit container permissions:
 •	Run your containers not as root but assign privilege only to the minimum extent.
 Use multi-stage builds:
 •	Reduce the size of the produced image by distinguishing phases of build and execute thus excluding unnecessary tools and files.
-  Enable Docker Content Trust (DCT):
-•	Use DCT,to ensure that only images that are signed and verified  should be fetched from the registry.
-  Scanning regularly for vulnerabilities:
+Enable Docker Content Trust (DCT):
+•	Use DCT, to ensure that only images that are signed and verified  should be fetched from the registry.
+Scanning regularly for vulnerabilities:
 •	Leverage security assessment tools, including trivy , Docker Bench for Security, or inject vulnerability scanning into CI/CD pipelines.
 
 2. Implement one of these practices in a Dockerfile and provide the code:
    Dockerfile:
 •	   Use an official base image
-                  FROM node:14-alpine
+       FROM node:14-alpine
 •	Create a non-root user
-                  RUN addgroup -S appgroup && adduser -S appuser -G appgroup
+       RUN addgroup -S appgroup && adduser -S appuser -G appgroup
 •	Set the working directory
-      WORKDIR /app
+       WORKDIR /app
 •	Copy the application files
-     COPY . .
+       COPY . .
 •	Change ownership of the working directory to the non-root user
-     RUN chown -R appuser:appgroup /app
+       RUN chown -R appuser:appgroup /app
 •	Switch to the non-root user
-    USER appuser
+       USER appuser
 •	Install dependencies and start the application
-   RUN npm install
-                CMD ["npm", "start"]
+       RUN npm install
+       CMD ["npm", "start"]
 
 2. Kubernetes Security Configuration:
-    1. Describe three Kubernetes security features:
+1. Describe three Kubernetes security features:
  a) Role-Based Access Control :
 •	It allows only authorized users to act inside a Kubernetes cluster   because it means a role is defined, and permissions are assigned.
  b) Pod Security Policies (PSPs):
 •	This sets policies related to security-oriented aspects of pod specs, such as usage of denied privileged containers and usage of runAsNonRoot.
-
 c) Network Policies: 
 •	Control network traffic between pods and services, helping to restrict communication to only what's necessary. 
+
 2.Write a Kubernetes YAML configuration that includes security Context settings for a pod:
 apiVersion: v1
 kind: Pod
@@ -54,11 +54,10 @@ spec:
         drop:                # Drop unnecessary capabilities
         - NET_RAW
       readOnlyRootFilesystem: true  # Enforce read-only file system
+
 3. IaaS Security Measures:
 Concept of Infrastructure as a Service (IaaS) and its security implications.
-
 IaaS is provided as virtualized computing resources over the internet, which includes servers, storage, and networking. Few examples include AWS EC2, Google Cloud Compute Engine, and Microsoft Azure VMs.
-
 Security Implications:
 Shared Responsibility Model:
 •	The cloud provider will take care of the physical security of infrastructure. Application, operating system, and data shall be the user's responsibility.
